@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="31" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="23">
+ <tileset firstgid="1" source="Overworld.tsx"/>
+ <layer id="1" name="Ground" width="31" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1lrtuE0EUhmfW4wcIpuGSDiSwUiMlocKkxxFPgc3K7rATHiChDFpsOm4PELuHUEKeIHYPoURADecwc7S/j89iKJD8a2a9M/Od28xszzvXA41IV0hHpB/OuW+k7yD+r/BR/O4ptVdB08y5t9ROqA3wbKlnqEXqJr5eG22Sdw3qX3SxX6s594najNoNaudZfBadQJ9ZdwLxQuyLn5qp+fh+m8bfTuxrxLxO+knM+/AsOqf/bmVRzHtA3E6wY9gh3U3q/sEerSFpj7Sv1sqJ85mU1cvcFSnPMu5N8mMd3reAv+FW8x+rMbxWThqTjkOsLYm1FWdhs72aj3FZFRMet0Oi32+dBdtnXHPHL8ZG+JKHqvkW9xn7ShqHyLf2SkcxD2jsIelJWOz3Uvz0/H2I9WsXY8dj39GcE9L7EGOfK5s1l9WkuqiRbtbLvjzr+ch8RG0ji+sxm2vsnPQlsXW81hWXa2KS1CbWbpLwxedafVkv6d0rZ58hHHNtt8X29bgnLPYNw2f2d9dH9iVq9wy++I21ewRcrm2ux3lqZ0q89j0aNwBmO3G/0ruPSaekNbLzAqlRL/0ukg1W7fKYvo/7ME99tmdA84YusoWvmaeuXIO1Scwt0naqEYl5AXagcugLj3XZl1wRMvOwaH+VhCHq0ryHYdmOF1UcmNtPY0d+eb4lvBv7FWN43Q8qf8iUPf+v0ncj3s1yn6Ed1jnTNPbX34i5zXQOrWXL51xHcfU5M0jPvP+H9SiLw+91H/flZmJvZfZ+Pw72erz/Z+letBhVNsm+wnujpf7D2Ip/Mt+re1ifAZbERrlXet7Oq5VP8XOWzp2qeqiqbzmn5V7xrtSoIr6TdL5qHta8rDutGIPs54mt90kTeEPwF7m8lnzrydpnEI9cMfUYudPwvkKmcNuptg/D4jryrZcrH6UdG+eA5INjfAB+Ynx1XUqe52E5jlU5WJUP9Fn2BOYX68q70mbvlte37gIrH1X7VvPwO0vXsvALyL1m6ppAu5At9SR+8Xv8zsI4Sex07nUO8H+LLfGeKi4Lv7MKI3a6jldJxnq3+E2iff6f+gX8ZJ32
+  </data>
+ </layer>
+ <layer id="4" name="Objects" width="31" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9l7lSGzEch4XxcqSBAggtVxmwaUIBD0ACZTjCK2RoSIAOO3kFJlU4OjBM3iBlEigI2BwlOVsIaUMaPuHdmUWWdrXamN/MN2O04v9Jsla73s0I8V7hGmTK8KtB1ES26drjcp4V4it8g+9wlklew8Ur43lCNEEztHj27iY33Z08wjcIQ5BL4E6TftZpAJ7hm4JpKGVq3UE/l2QN7RPUmwzVfCuqXtWt9qtH5H6paNwuOY64ptsnF3Apat3hvkFN031mimntZVZhlP8da4iet65+M7RAK7RBO/yFaw3/NDVfWLhN8xqCHOThMYxAD317NfRpasxbuE2ZhhmYhecwB+PUeaLhqWH8tvM+gC9wKKpn7AoUoAiv4Y2I3mtq1HnbnpFymFuwDSXYgV1DX1NN05pHjeGD5pquLa6OTAfXOx32eTgL0ZcjI7+/iu9+yU35ChZhCZajblI/pnnbRJ7njf7nd7jWYB02YNPCnSbh9f6I6xN8hj3YD7mDtXd9bse5L3Bdwm+4gj/Z6LPxf7hLvr+DZ2ondMFD6Paq7bZzTbom6jM0eA9zWds0btfv0rQX1Dmof+veHVzdSZPW/YPN+FPZkCuMpQDFmDFJbyXBea6mlf34wLvbtkWtbShZuMtu2tvk8Q4r7iOcZfk+Vmd3moTvbzX1OMtUt26v1dsbuE80vwXvg1O4AVLwn1U=
+  </data>
+ </layer>
+ <objectgroup id="6" name="Collision">
+  <object id="1" x="197.5" y="144.5">
+   <polygon points="0,0 68.5,0.5 67,59 3.5,58"/>
+  </object>
+  <object id="2" x="282" y="142.232">
+   <polygon points="0,0 90.5,0 89.5,-12.5 121,-11.5 119.5,-42 137,-42.5 137.5,-58.5 151.5,-58 152,-91.5 149,-96 -191.5,-129.5 -189.5,-122.5 -173.5,-121 -173,-98.5 -207,-98 -205,-84.5 -221.5,-82 -221.5,-50 -238.5,-50 -237,-18.5 -254,-18 -253.5,35 -238.5,36 -236.5,52 -202,53 -202.5,47 -217,45.5 -216,-12 -199,-11 -199,-28 -184.5,-26.5 -183.5,-43.5 -150,-42 -151,-92.5 -93.5,-91 -93.5,-75 -78,-75 -76,-60 -62.5,-59.5 -60.5,-44 -25,-44 -22,-60.5 19,-58.5 19.5,-17 1.5,-18.5"/>
+  </object>
+  <object id="3" x="356.5" y="160.5">
+   <polygon points="0,0 -88.5,-2 -88,15.5 -72.5,17.5 -71,35 -49,33.5 -50,17.5 -19,17 -18.5,3"/>
+  </object>
+  <object id="4" x="103.965" y="286.5">
+   <polygon points="0,0 -0.5,0.5 -7,0.5 -6.5,30 -2,29 -2.5,20.5 30,20 29.5,-13 42,-13.5 41.5,-30.5 36.5,-31 36.5,-18.5 7,-20.5 -2,-20 -2,-36 -12,-35 -12,31 -2,31.5"/>
+  </object>
+  <object id="5" x="54" y="252">
+   <polygon points="0,0 0,65 -13.5,64.5 -13.5,56.5 -13.5,-2.5"/>
+  </object>
+  <object id="6" x="37.9645" y="308.268">
+   <polygon points="0,0 -27,-1.5 -24.5,159 -37,159 -35.5,-308.5 55.5,-309.5 55.5,-293 -26,-294.5 -23,-58 1.5,-59"/>
+  </object>
+  <object id="7" x="1.5" y="464.5">
+   <polygon points="0,0 495.5,0 494.5,15 -2.5,15"/>
+  </object>
+  <object id="8" x="438" y="52">
+   <polygon points="0,0 42,0 43,42 42.5,45 33,45.5 32,161 43.5,165.5 43,410.5 57,410.5 57.5,-51.5 -8,-52.5 -4,-0.5"/>
+  </object>
+  <object id="9" x="130.5" y="177">
+   <polygon points="0,0 41.5,-0.5 42,12.5 1,13"/>
+  </object>
+  <object id="10" x="178" y="178">
+   <polygon points="0,0 1,10.5 13,8.5 11,0.5"/>
+  </object>
+  <object id="11" x="273.5" y="179.5">
+   <polygon points="0,0 -1,10 11.5,10.5 9.5,-1"/>
+  </object>
+  <object id="12" x="241.5" y="378">
+   <polygon points="0,0 28.5,-0.5 29.5,32.5 -0.5,33"/>
+  </object>
+  <object id="13" x="320.5" y="369" width="47" height="43.5">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="Places">
+  <object id="15" name="Hero" x="231.5" y="222.5">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

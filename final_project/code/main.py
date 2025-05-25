@@ -14,7 +14,6 @@ class Game:
     and running the main game loop.
     """
 
-
     def __init__(self):
         # Initialize Pygame modules
         pygame.init()

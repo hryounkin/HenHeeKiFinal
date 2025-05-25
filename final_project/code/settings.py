@@ -16,7 +16,8 @@ TILE_SIZE = 32
 SCALE_FACTOR = 2
 
 # Path to the TMX file containing the tile map configuration.
-SNOWMAP_FILE = "../maps/TMX/MAP_SNOW.tmx"
+SNOW_MAP_FILE = "../maps/TMX/MAP_SNOW.tmx"
+FOREST_MAP_FILE = "../maps/TMX/MAP_FOREST.tmx"
 
 # Directory path for the player's sprite images (specifically for the 'down' state).
 PLAYER_IMAGE_FOLDER = '../images/player/down/'

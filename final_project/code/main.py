@@ -42,14 +42,15 @@ class Game:
         # Player Setup
         self.player_exists = False
 
-        self.game_health_max = 100
-        self.game_health = 100
+        self.game_health_max = 5
+        self.game_health = 5
         self.invincible = False
         self.invincible_timer = 0
 
 
         # Load the map and initialize objects
-        self.setup(SNOWMAP_FILE)
+        self.current_map= "Forest"
+        self.setup(FOREST_MAP_FILE)
 
     def setup(self, map_file):
         """
@@ -101,7 +102,7 @@ class Game:
                 TransitionSprite(
                     (obj.x * SCALE_FACTOR, obj.y * SCALE_FACTOR),
                     pygame.Surface((obj.width * SCALE_FACTOR, obj.height * SCALE_FACTOR)),
-                    self.collision_sprites
+                    self.transition_sprites
                 )
             if obj.name == 'Enemy':
                 self.enemy = Enemy(
@@ -112,6 +113,9 @@ class Game:
                     self
                 )
 
+
+    def map_transition(self, map):
+        self.setup(map)
 
     def game_over(self):
         #ends the game
@@ -158,8 +162,18 @@ class Game:
             if self.invincible and ((pygame.time.get_ticks() - self.invincible_timer) >1000):
                 self.invincible = False
 
+            for transition in self.transition_sprites:
+                if self.player.rect.colliderect(transition.rect):
+                    if self.current_map == "Snow":
+                        self.map_transition(FOREST_MAP_FILE)
+                        self.current_map = "Forest"
+                    else:
+                        self.map_transition(SNOW_MAP_FILE)
+                        self.current_map = "Snow"
+
+            # HP UI
             text = "Life: " + str(self.game_health)
-            life_banner = self.font.render(text, True, (255, 255, 0))
+            life_banner = self.font.render(text, True, (255, 0, 0))
             self.display_surface.blit(life_banner, (20, 20))
 
             # Update the full display surface to the screen

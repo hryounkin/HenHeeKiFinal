@@ -26,11 +26,6 @@ class Game:
         self.clock = pygame.time.Clock()
         self.running = True
 
-        # Load background music and set volume
-        # self.music = pygame.mixer.Sound(r'..\audio\10. Overworld.mp3')
-        # self.music.set_volume(0.3)
-        # self.music.play()
-
         # Set up sprite groups
         self.all_sprites = AllSprites()  # For all renderable sprites
         self.collision_sprites = pygame.sprite.Group()  # For objects that the player collides with

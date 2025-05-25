@@ -85,28 +85,6 @@ class Enemy(pygame.sprite.Sprite):
                 self.direction = self.direction.normalize()
 
 
-    def animate(self, dt):
-        """
-        Updates the player's animation frame based on movement and elapsed time.
-
-        :param dt: Delta time in seconds.
-        """
-        # Change animation state based on the movement direction
-        if self.direction.x != 0:
-            self.state = 'right' if self.direction.x > 0 else 'left'
-        if self.direction.y != 0:
-            self.state = 'down' if self.direction.y > 0 else 'up'
-
-        # Update the frame index when moving; reset if there's no movement
-        if self.direction.length() != 0:
-            self.frame_index += 5 * dt
-        else:
-            self.frame_index = 0
-
-        # Update the image based on the current frame in the animation cycle
-        self.image = self.frames[self.state][int(self.frame_index) % len(self.frames[self.state])]
-
-
     def move(self, dt):
         """
         Moves the player and handles collision detection.
@@ -134,6 +112,28 @@ class Enemy(pygame.sprite.Sprite):
                         self.hitbox_rect.top = sprite.rect.bottom
                     elif self.direction.y > 0:
                         self.hitbox_rect.bottom = sprite.rect.top
+
+    def animate(self, dt):
+        """
+        Updates the player's animation frame based on movement and elapsed time.
+
+        :param dt: Delta time in seconds.
+        """
+        # Change animation state based on the movement direction
+        if self.direction.x != 0:
+            self.state = 'right' if self.direction.x > 0 else 'left'
+        if self.direction.y != 0:
+            self.state = 'down' if self.direction.y > 0 else 'up'
+
+        # Update the frame index when moving; reset if there's no movement
+        if self.direction.length() != 0:
+            self.frame_index += 5 * dt
+        else:
+            self.frame_index = 0
+
+        # Update the image based on the current frame in the animation cycle
+        self.image = self.frames[self.state][int(self.frame_index) % len(self.frames[self.state])]
+
 
     def update(self, dt):
         self.chasePlayer(self.player_to_chase.rect.center, self.current_radius)

@@ -16,8 +16,7 @@ TILE_SIZE = 16
 SCALE_FACTOR = 2
 
 # Path to the TMX file containing the tile map configuration.
-FINALMAP_FILE = "../data/maps/lightworld_final_map.tmx"
-FIRSTMAP_FILE = "../data/maps/lightworld_map.tmx"
-BLANKMAP_FILE = "../data/maps/Blank.tmx"
+SNOWMAP_FILE = "../maps/TMX/MAP_SNOW.tmx"
+
 # Directory path for the player's sprite images (specifically for the 'down' state).
 PLAYER_IMAGE_FOLDER = '../images/player/down/'

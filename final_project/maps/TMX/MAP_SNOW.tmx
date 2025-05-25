@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="38">
- <tileset firstgid="1" source="snowWIP.tsx"/>
- <tileset firstgid="257" source="mountain_landscape.tsx"/>
+ <tileset firstgid="1" source="../TSX/snowWIP.tsx"/>
+ <tileset firstgid="257" source="../TSX/mountain_landscape.tsx"/>
  <layer id="1" name="ground layer2" width="50" height="50">
   <data encoding="csv">
 28,14,14,29,13,29,15,45,15,44,31,45,31,43,28,12,27,30,13,43,11,30,13,30,14,16,31,44,28,13,29,43,11,45,15,13,30,44,11,29,30,30,28,43,29,14,12,31,14,31,

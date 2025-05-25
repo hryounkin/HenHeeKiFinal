@@ -11,14 +11,13 @@ from groups import AllSprites
 class Game:
     """
     Main game class responsible for initializing the game, loading map data,
-    and running the main game loop.
+    tracking player health, and running the main game loop.
     """
 
     def __init__(self):
-        # Initialize Pygame modules
         pygame.init()
 
-        # Set up the display window
+        #display window setup
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption('Final Project COMP1020')
 
@@ -29,56 +28,54 @@ class Game:
         # Set up sprite groups
         self.all_sprites = AllSprites()  # For all renderable sprites
         self.collision_sprites = pygame.sprite.Group()  # For objects that the player collides with
-        self.enemy_sprites = pygame.sprite.Group() # For enemies
         self.transition_sprites = pygame.sprite.Group() # For transition zones
 
+        #font for UI
         self.font = pygame.font.SysFont('monospace', 24)
 
         # Player Setup
         self.player_exists = False
-
         self.game_health_max = 5
         self.game_health = 5
         self.invincible = False
         self.invincible_timer = 0
 
 
-        # Load the map and initialize objects
+        # Load the map to start
         self.current_map= "Forest"
         self.setup(FOREST_MAP_FILE)
 
     def setup(self, map_file):
         """
-        Loads the TMX map and sets up game objects based on specific map layers.
+        Loads map layers, clearing out old data.
         """
-        #Empty collision objects
+        #Empty collision and sprite objects
         self.collision_sprites.empty()
         self.all_sprites.empty()
-        self.enemy_sprites.empty()
         self.transition_sprites.empty()
 
         # Load the map data using PyTMX
         map_data = load_pygame(map_file)
         self.display_surface.fill('black')
         pygame.time.delay(100)
-        # Process collision objects from the 'Collisions' layer
+
+        # Collision layer setup
         for obj in map_data.get_layer_by_name('collision'):
-            # Collision objects are scaled using a factor of 2
             CollisionSprite(
                 (obj.x * SCALE_FACTOR, obj.y * SCALE_FACTOR),
                 pygame.Surface((obj.width * SCALE_FACTOR, obj.height * SCALE_FACTOR)),
                 self.collision_sprites
             )
 
-        # Process the 'Ground' layer and add each tile as a sprite
+        # Base ground layer
         for x, y, image in map_data.get_layer_by_name('ground').tiles():
             Sprite((x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR), image, self.all_sprites)
 
-        # Process the 'Ground_2' layer similarly for additional visual tiles
+        # Objects that exist over the ground layer
         for x, y, image in map_data.get_layer_by_name('objects').tiles():
             Sprite((x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR), image, self.all_sprites)
 
-        # Locate the starting position for the player via the "Places" layer.
+        # Assigns important location objects
         for obj in map_data.get_layer_by_name("places"):
             if obj.name == 'Hero':
                 if self.player_exists:
@@ -132,11 +129,9 @@ class Game:
         renders frames, and maintains the frame rate.
         """
         while self.running:
-            # Calculate the time delta (in seconds) for smooth movement updates.
             dt = self.clock.tick() / 1000
-
             main_keys = pygame.key.get_pressed()
-            # Event handling loop
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
@@ -145,18 +140,7 @@ class Game:
             if main_keys[pygame.K_ESCAPE]:
                 self.game_over()
 
-            # Update all sprites (calls update on every sprite in the group)
-            self.all_sprites.update(dt)
-
-            # Clear the screen with a black background
-            self.display_surface.fill('black')
-            # Draw all sprites, centering the camera on the player
-            self.all_sprites.draw(self.player.rect.center)
-
-            # updates i frames
-            if self.invincible and ((pygame.time.get_ticks() - self.invincible_timer) >1000):
-                self.invincible = False
-
+            #check for transitions between maps
             for transition in self.transition_sprites:
                 if self.player.rect.colliderect(transition.rect):
                     if self.current_map == "Snow":
@@ -165,6 +149,17 @@ class Game:
                     else:
                         self.map_transition(SNOW_MAP_FILE)
                         self.current_map = "Snow"
+
+            # Update all sprites
+            self.all_sprites.update(dt)
+
+            # Clears and redraws the screen
+            self.display_surface.fill('black')
+            self.all_sprites.draw(self.player.rect.center)
+
+            # updates i frames
+            if self.invincible and ((pygame.time.get_ticks() - self.invincible_timer) >1000):
+                self.invincible = False
 
             # HP UI
             text = "Life: " + str(self.game_health)

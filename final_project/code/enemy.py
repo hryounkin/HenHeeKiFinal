@@ -41,7 +41,7 @@ class Enemy(pygame.sprite.Sprite):
         self.detect_radius = 200
         self.chase_radius = 700
         self.current_radius = self.detect_radius
-        self.speed = 100  # Movement speed (pixels per second)
+        self.speed = 200  # Movement speed (pixels per second)
         self.direction = pygame.Vector2()
         self.collision_sprites = collision_sprites
 

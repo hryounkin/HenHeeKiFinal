@@ -5,8 +5,9 @@ from settings import *
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, collision_sprites, player):
+    def __init__(self, pos, groups, collision_sprites, player, game):
         super().__init__(groups)
+        self.game = game
 
         # Dimensions of the player sprite before scaling
         self.width = 16
@@ -91,27 +92,35 @@ class Enemy(pygame.sprite.Sprite):
 
         :param dt: Delta time in seconds from the last frame (ensures smooth movement).
         """
-        self.pos += self.direction * self.speed * dt
-
-        # Move horizontally, then resolve horizontal collisions
-        self.hitbox_rect.center = (round(self.pos.x), round(self.pos.y))
+        # Horizontal movement
+        self.pos.x += self.direction.x * self.speed * dt
+        self.hitbox_rect.x = round(self.pos.x)
         self.collision('horizontal')
+
+        # Vertical movement
+        self.pos.y += self.direction.y * self.speed * dt
+        self.hitbox_rect.y = round(self.pos.y)
         self.collision('vertical')
+
+        # Positional update
         self.rect.center = self.hitbox_rect.center
 
     def collision(self, direction):
         for sprite in self.collision_sprites:
             if sprite.rect.colliderect(self.hitbox_rect):
                 if direction == 'horizontal':
-                    if self.direction.x > 0:
-                        self.hitbox_rect.right = sprite.rect.left
-                    elif self.direction.x < 0:
-                        self.hitbox_rect.left = sprite.rect.right
+                    if self.direction.x > 0:  # Moving right
+                        self.hitbox_rect.right = sprite.rect.left -1
+                    elif self.direction.x < 0:  # Moving left
+                        self.hitbox_rect.left = sprite.rect.right +1
+                    self.direction.x = 0  # Stop horizontal movement
+
                 elif direction == 'vertical':
-                    if self.direction.y < 0:
-                        self.hitbox_rect.top = sprite.rect.bottom
-                    elif self.direction.y > 0:
-                        self.hitbox_rect.bottom = sprite.rect.top
+                    if self.direction.y > 0:  # Moving down
+                        self.hitbox_rect.bottom = sprite.rect.top -1
+                    elif self.direction.y < 0:  # Moving up
+                        self.hitbox_rect.top = sprite.rect.bottom +1
+                    self.direction.y = 0  # Stop vertical movement
 
     def animate(self, dt):
         """
@@ -136,7 +145,10 @@ class Enemy(pygame.sprite.Sprite):
 
 
     def update(self, dt):
+        #Chase and deal damage
         self.chasePlayer(self.player_to_chase.rect.center, self.current_radius)
+        if self.rect.colliderect(self.player_to_chase.rect) and not self.game.invincible:
+            self.game.take_damage(1)
 
         self.move(dt)
         self.animate(dt)

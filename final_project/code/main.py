@@ -37,9 +37,16 @@ class Game:
         self.enemy_sprites = pygame.sprite.Group() # For enemies
         self.transition_sprites = pygame.sprite.Group() # For transition zones
 
+        self.font = pygame.font.SysFont('monospace', 24)
+
         # Player Setup
         self.player_exists = False
-        self.player_health = 5
+
+        self.game_health_max = 100
+        self.game_health = 100
+        self.invincible = False
+        self.invincible_timer = 0
+
 
         # Load the map and initialize objects
         self.setup(SNOWMAP_FILE)
@@ -100,9 +107,25 @@ class Game:
                 self.enemy = Enemy(
                     (obj.x * SCALE_FACTOR, obj.y * SCALE_FACTOR),
                     self.all_sprites,
-                    self.enemy_sprites,
-                    self.player
+                    self.collision_sprites,
+                    self.player,
+                    self
                 )
+
+
+    def game_over(self):
+        #ends the game
+        self.running = False
+
+
+    def take_damage(self, amount):
+        if not self.invincible:
+            self.game_health -= amount
+            if self.game_health <= 0:
+                self.game_over()
+            self.invincible = True
+            self.invincible_timer = pygame.time.get_ticks()
+
 
     def run(self):
         """
@@ -119,14 +142,10 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.running = False
 
+            #emergency quit button
             if main_keys[pygame.K_ESCAPE]:
-                self.running = False
-            # if main_keys[pygame.K_l]:
-            #     self.setup(FIRSTMAP_FILE)
-            # if main_keys[pygame.K_o]:
-            #     self.setup(BLANKMAP_FILE)
-            # if main_keys[pygame.K_p]:
-            #     self.setup(FINALMAP_FILE)
+                self.game_over()
+
             # Update all sprites (calls update on every sprite in the group)
             self.all_sprites.update(dt)
 
@@ -135,6 +154,13 @@ class Game:
             # Draw all sprites, centering the camera on the player
             self.all_sprites.draw(self.player.rect.center)
 
+            # updates i frames
+            if self.invincible and ((pygame.time.get_ticks() - self.invincible_timer) >1000):
+                self.invincible = False
+
+            text = "Life: " + str(self.game_health)
+            life_banner = self.font.render(text, True, (255, 255, 0))
+            self.display_surface.blit(life_banner, (20, 20))
 
             # Update the full display surface to the screen
             pygame.display.update()

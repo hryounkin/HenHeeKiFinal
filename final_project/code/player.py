@@ -43,6 +43,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 400  # Movement speed (pixels per second)
         self.collision_sprites = collision_sprites
 
+
     def load_images(self):
         """
         Loads animation frames from subdirectories for each movement state.
@@ -133,9 +134,10 @@ class Player(pygame.sprite.Sprite):
     def get_position(self):
         return self.rect.center
 
+
     def update(self, dt):
         """
-        Update function called each frame to process input, move the player, and animate.
+        Update function called each frame to process input, move the player, animation, and i_frames.
 
         :param dt: Delta time in seconds.
         """

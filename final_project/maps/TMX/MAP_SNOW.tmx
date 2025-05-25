@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="49">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="66">
  <tileset firstgid="1" source="../TSX/snowWIP.tsx"/>
  <tileset firstgid="257" source="../TSX/mountain_landscape.tsx"/>
  <layer id="1" name="ground" width="50" height="50">
@@ -122,11 +122,11 @@
   <object id="10" x="31.1284" y="49.2866" width="62.2568" height="101.167"/>
   <object id="11" x="446.174" y="189.364" width="93.3852" height="124.514"/>
   <object id="12" x="671.855" y="814.527" width="59.6628" height="103.761"/>
-  <object id="13" x="892.348" y="1219.2" width="98.5733" height="124.514"/>
-  <object id="14" x="996.109" y="1354.09" width="57.0687" height="108.949"/>
+  <object id="13" x="898.015" y="1234.53" width="92.5733" height="92.514"/>
+  <object id="14" x="996.109" y="1410.42" width="57.0687" height="52.6157"/>
   <object id="15" x="1468.22" y="1452.66" width="70.0389" height="103.761"/>
-  <object id="16" x="1444.88" y="1245.14" width="85.6031" height="90.7912"/>
-  <object id="17" x="1335.93" y="1154.35" width="101.167" height="127.108"/>
+  <object id="16" x="1442.88" y="1250.14" width="93.6031" height="94.2912"/>
+  <object id="17" x="1343.93" y="1154.35" width="93.167" height="121.858"/>
   <object id="18" x="1405.97" y="798.962" width="93.3852" height="127.108"/>
   <object id="19" x="1312.58" y="910.506" width="62.2568" height="103.761"/>
   <object id="20" x="990.921" y="568.093" width="95.9792" height="134.89"/>
@@ -155,12 +155,27 @@
   <object id="46" x="242.182" y="1256.73" width="27.4545" height="46.1818"/>
   <object id="47" x="273.818" y="518.545" width="28.4545" height="48.0909"/>
   <object id="48" x="1458.38" y="295.375" width="27.375" height="47.75"/>
+  <object id="60" x="1000" y="1393.67" width="48.3333" height="17"/>
+  <object id="61" x="1007.67" y="1375.67" width="32.6667" height="21.3333"/>
+  <object id="62" x="1014.67" y="1362.67" width="19.6667" height="15.3333"/>
+  <object id="63" x="1021.33" y="1358" width="6.66667" height="6.33333"/>
+  <object id="64" x="923" y="1217.67" width="36" height="24.6667"/>
+  <object id="65" x="904" y="1324" width="67.3333" height="19.3333"/>
  </objectgroup>
  <objectgroup id="8" name="places">
   <object id="4" name="Hero" x="456.55" y="1548.64">
    <point/>
   </object>
   <object id="43" name="Enemy" x="766.667" y="324.242">
+   <point/>
+  </object>
+  <object id="49" name="Enemy" x="133.333" y="860.606">
+   <point/>
+  </object>
+  <object id="50" name="Enemy" x="1484.85" y="1072.73">
+   <point/>
+  </object>
+  <object id="51" name="Enemy" x="1260.61" y="818.182">
    <point/>
   </object>
  </objectgroup>

@@ -6,7 +6,6 @@ from settings import *
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, pos, groups, collision_sprites, player):
-        print(type(groups))
         super().__init__(groups)
 
         # Dimensions of the player sprite before scaling
@@ -38,8 +37,11 @@ class Enemy(pygame.sprite.Sprite):
 
         # Movement settings
         self.player_to_chase = player
+        self.detect_radius = 200
+        self.chase_radius = 700
+        self.current_radius = self.detect_radius
+        self.speed = 100  # Movement speed (pixels per second)
         self.direction = pygame.Vector2()
-        self.speed = 50  # Movement speed (pixels per second)
         self.collision_sprites = collision_sprites
 
 
@@ -68,14 +70,18 @@ class Enemy(pygame.sprite.Sprite):
 
         player_distance = pygame.Vector2(player_x, player_y).distance_to(pygame.Vector2(self.rect.center))
 
+        if player_distance < self.chase_radius:
+            self.current_radius = self.chase_radius
+
         #if the player is too far away, the enemy will idle
         if player_distance > chase_radius:
             self.direction=pygame.Vector2(0,0)
+            self.current_radius = self.detect_radius
 
         #if within the chase radius, follow the player
         else:
             self.direction = pygame.Vector2(player_x, player_y) - pygame.Vector2(self.rect.center)
-            if self.direction.length != 0:
+            if self.direction.length() > 0:
                 self.direction = self.direction.normalize()
 
 
@@ -130,7 +136,7 @@ class Enemy(pygame.sprite.Sprite):
                         self.hitbox_rect.bottom = sprite.rect.top
 
     def update(self, dt):
-        self.chasePlayer(self.player_to_chase.rect.center, 100)
+        self.chasePlayer(self.player_to_chase.rect.center, self.current_radius)
 
         self.move(dt)
         self.animate(dt)

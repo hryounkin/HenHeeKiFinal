@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="38">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="49">
  <tileset firstgid="1" source="../TSX/snowWIP.tsx"/>
  <tileset firstgid="257" source="../TSX/mountain_landscape.tsx"/>
- <layer id="1" name="ground layer2" width="50" height="50">
+ <layer id="1" name="ground" width="50" height="50">
   <data encoding="csv">
 28,14,14,29,13,29,15,45,15,44,31,45,31,43,28,12,27,30,13,43,11,30,13,30,14,16,31,44,28,13,29,43,11,45,15,13,30,44,11,29,30,30,28,43,29,14,12,31,14,31,
 12,31,44,15,28,12,31,16,27,43,43,30,31,28,43,13,11,15,12,14,31,30,12,31,11,28,13,43,11,30,11,14,27,29,15,14,31,27,15,28,27,30,31,16,11,28,29,32,16,30,
@@ -56,7 +56,7 @@
 16,44,11,43,43,15,15,28,45,15,30,12,32,30,16,16,29,28,31,14,28,11,29,45,32,29,15,30,27,29,29,11,44,45,13,43,29,29,12,16,27,27,12,12,29,43,28,15,15,13
 </data>
  </layer>
- <layer id="9" name="ground layer1" width="50" height="50">
+ <layer id="9" name="objects" width="50" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,133,134,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -111,7 +111,7 @@
 </data>
  </layer>
  <objectgroup id="6" name="transition">
-  <object id="2" name="transition" x="389.105" y="1566.8" width="132.296" height="28.5344"/>
+  <object id="2" name="Transition" x="389.105" y="1566.8" width="132.296" height="28.5344"/>
  </objectgroup>
  <objectgroup id="7" name="collision">
   <object id="5" x="347.601" y="705.577" width="98.5733" height="121.92"/>
@@ -147,9 +147,20 @@
   <object id="35" x="1346.3" y="160.83" width="23.3463" height="28.5344"/>
   <object id="36" x="350.941" y="1473.71" width="32.5615" height="125.422"/>
   <object id="37" x="542.692" y="1472.5" width="32.5615" height="125.422"/>
+  <object id="38" x="1598" y="-5.75" width="10.5" height="1638.25"/>
+  <object id="40" x="-7" y="-11.25" width="1619.25" height="13.6136"/>
+  <object id="41" x="-9" y="-14.3333" width="11.3333" height="1624"/>
+  <object id="42" x="-14" y="1596.75" width="1627" height="11.25"/>
+  <object id="45" x="1010.33" y="1031.67" width="27" height="46"/>
+  <object id="46" x="242.182" y="1256.73" width="27.4545" height="46.1818"/>
+  <object id="47" x="273.818" y="518.545" width="28.4545" height="48.0909"/>
+  <object id="48" x="1458.38" y="295.375" width="27.375" height="47.75"/>
  </objectgroup>
- <objectgroup id="8" name="spawn">
-  <object id="4" x="456.55" y="1548.64">
+ <objectgroup id="8" name="places">
+  <object id="4" name="Hero" x="456.55" y="1548.64">
+   <point/>
+  </object>
+  <object id="43" name="Enemy" x="766.667" y="324.242">
    <point/>
   </object>
  </objectgroup>

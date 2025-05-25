@@ -10,7 +10,7 @@ from os import walk  # Used for traversing directories to load images
 WINDOW_WIDTH, WINDOW_HEIGHT = 1024, 780
 
 # Base tile size of the map (to be scaled by the game)
-TILE_SIZE = 16
+TILE_SIZE = 32
 
 # Scale Factor
 SCALE_FACTOR = 2

@@ -43,9 +43,9 @@ class Game:
         self.player_health = 5
 
         # Load the map and initialize objects
-        self.setup(FINALMAP_FILE)
+        self.setup(SNOWMAP_FILE)
 
-    def setup(self, MAP_FILE):
+    def setup(self, map_file):
         """
         Loads the TMX map and sets up game objects based on specific map layers.
         """
@@ -56,11 +56,11 @@ class Game:
         self.transition_sprites.empty()
 
         # Load the map data using PyTMX
-        map_data = load_pygame(MAP_FILE)
+        map_data = load_pygame(map_file)
         self.display_surface.fill('black')
         pygame.time.delay(100)
         # Process collision objects from the 'Collisions' layer
-        for obj in map_data.get_layer_by_name('Collision'):
+        for obj in map_data.get_layer_by_name('collision'):
             # Collision objects are scaled using a factor of 2
             CollisionSprite(
                 (obj.x * SCALE_FACTOR, obj.y * SCALE_FACTOR),
@@ -69,15 +69,15 @@ class Game:
             )
 
         # Process the 'Ground' layer and add each tile as a sprite
-        for x, y, image in map_data.get_layer_by_name('Ground').tiles():
+        for x, y, image in map_data.get_layer_by_name('ground').tiles():
             Sprite((x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR), image, self.all_sprites)
 
         # Process the 'Ground_2' layer similarly for additional visual tiles
-        for x, y, image in map_data.get_layer_by_name('Objects').tiles():
+        for x, y, image in map_data.get_layer_by_name('objects').tiles():
             Sprite((x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR), image, self.all_sprites)
 
         # Locate the starting position for the player via the "Places" layer.
-        for obj in map_data.get_layer_by_name("Places"):
+        for obj in map_data.get_layer_by_name("places"):
             if obj.name == 'Hero':
                 if self.player_exists:
                     self.player.kill()
@@ -122,12 +122,12 @@ class Game:
 
             if main_keys[pygame.K_ESCAPE]:
                 self.running = False
-            if main_keys[pygame.K_l]:
-                self.setup(FIRSTMAP_FILE)
-            if main_keys[pygame.K_o]:
-                self.setup(BLANKMAP_FILE)
-            if main_keys[pygame.K_p]:
-                self.setup(FINALMAP_FILE)
+            # if main_keys[pygame.K_l]:
+            #     self.setup(FIRSTMAP_FILE)
+            # if main_keys[pygame.K_o]:
+            #     self.setup(BLANKMAP_FILE)
+            # if main_keys[pygame.K_p]:
+            #     self.setup(FINALMAP_FILE)
             # Update all sprites (calls update on every sprite in the group)
             self.all_sprites.update(dt)
 

@@ -40,7 +40,7 @@ class Player(pygame.sprite.Sprite):
 
         # Movement settings
         self.direction = pygame.Vector2()
-        self.speed = 350  # Movement speed (pixels per second)
+        self.speed = 400
         self.collision_sprites = collision_sprites
 
 

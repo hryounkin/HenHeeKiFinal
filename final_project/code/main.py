@@ -3,9 +3,10 @@ import pygame.key
 from settings import *
 from player import Player
 from enemy import Enemy
-from sprites import Sprite, CollisionSprite, TransitionSprite
+from sprites import Sprite, CollisionSprite, TransitionSprite, RelicSprite
 from pytmx.util_pygame import load_pygame
 from groups import AllSprites
+from random import randint
 
 
 class Game:
@@ -28,16 +29,22 @@ class Game:
         self.all_sprites = AllSprites()  # For all renderable sprites
         self.collision_sprites = pygame.sprite.Group()  # For objects that the player collides with
         self.transition_sprites = pygame.sprite.Group() # For transition zones
+        self.relic_sprites = pygame.sprite.Group() #For relics
 
         #font for UI
         self.font = pygame.font.SysFont('monospace', 24)
+        self.font2 = pygame.font.SysFont('monospace', 60)
 
         # Player Setup
         self.player_exists = False
-        self.game_health_max = 5
-        self.game_health = 5
+        self.game_health = 3
         self.invincible = False
         self.invincible_timer = 0
+
+        # Relic setup
+        self.relics_collected = 0
+        self.snow_relic_collected = False
+        self.forest_relic_collected = False
 
 
         # Load the map to start
@@ -53,6 +60,7 @@ class Game:
         self.collision_sprites.empty()
         self.all_sprites.empty()
         self.transition_sprites.empty()
+        self.relic_sprites.empty()
 
         # Load the map data using PyTMX
         map_data = load_pygame(map_file)
@@ -75,7 +83,32 @@ class Game:
         for x, y, image in map_data.get_layer_by_name('objects').tiles():
             Sprite((x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR), image, self.all_sprites)
 
-        # Assigns important location objects
+
+        for x, y, image in map_data.get_layer_by_name('relics').tiles():
+            if map_file == SNOW_MAP_FILE and self.snow_relic_collected == False:
+                Sprite((x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR), image, self.all_sprites)
+            if map_file == FOREST_MAP_FILE and self.forest_relic_collected == False:
+                Sprite((x * TILE_SIZE * SCALE_FACTOR, y * TILE_SIZE * SCALE_FACTOR), image, self.all_sprites)
+
+
+        for obj in map_data.get_layer_by_name('relic_detect'):
+            if map_file == SNOW_MAP_FILE and self.snow_relic_collected == False:
+                self.relic = RelicSprite(
+                    (obj.x * SCALE_FACTOR, obj.y * SCALE_FACTOR),
+                    pygame.Surface((obj.width * SCALE_FACTOR, obj.height * SCALE_FACTOR)),
+                    self.relic_sprites
+                )
+                self.relic_sprites.add(self.relic)
+            if map_file == FOREST_MAP_FILE and self.forest_relic_collected == False:
+                self.relic = RelicSprite(
+                    (obj.x * SCALE_FACTOR, obj.y * SCALE_FACTOR),
+                    pygame.Surface((obj.width * SCALE_FACTOR, obj.height * SCALE_FACTOR)),
+                    self.relic_sprites
+                )
+                self.relic_sprites.add(self.relic)
+
+
+
         for obj in map_data.get_layer_by_name("places"):
             if obj.name == 'Hero':
                 if self.player_exists:
@@ -96,6 +129,7 @@ class Game:
                     pygame.Surface((obj.width * SCALE_FACTOR, obj.height * SCALE_FACTOR)),
                     self.transition_sprites
                 )
+
             if obj.name == 'Enemy':
                 self.enemy = Enemy(
                     (obj.x * SCALE_FACTOR, obj.y * SCALE_FACTOR),
@@ -103,26 +137,39 @@ class Game:
                     self.collision_sprites,
                     self.player,
                     self,
+                    randint(200, 280)
                 )
+
             if obj.name == 'Boss':
                 self.enemy = Enemy(
-                    (obj.x * SCALE_FACTOR*2, obj.y * SCALE_FACTOR*2),
+                    (obj.x * SCALE_FACTOR, obj.y * SCALE_FACTOR),
                     self.all_sprites,
                     self.collision_sprites,
                     self.player,
                     self,
-                    310
+                    randint(300, 380)
                 )
 
 
     def map_transition(self, map):
         self.setup(map)
 
-
     def game_over(self):
         #ends the game
+        game_end_text =  "GAME OVER"
+        relic_banner = self.font.render(game_end_text, True, (255, 0, 0))
+        self.display_surface.blit(relic_banner, (450 ,350))
+        pygame.display.update()
+        pygame.time.delay(2800)
         self.running = False
 
+    def game_win(self):
+        game_end_text = "YOU WIN"
+        relic_banner = self.font.render(game_end_text, True, (255, 0, 0))
+        self.display_surface.blit(relic_banner, (450, 350))
+        pygame.display.update()
+        pygame.time.delay(2800)
+        self.running = False
 
     def take_damage(self, amount):
         if not self.invincible:
@@ -160,6 +207,18 @@ class Game:
                         self.map_transition(SNOW_MAP_FILE)
                         self.current_map = "Snow"
 
+            #checks for relic pick up
+            for relic in self.relic_sprites:
+                if self.player.rect.colliderect(relic.rect):
+                    if (self.current_map == "Forest") and (self.forest_relic_collected == False):
+                        self.forest_relic_collected = True
+                        self.relics_collected += 1
+                    if (self.current_map == "Snow") and (self.snow_relic_collected == False):
+                        self.snow_relic_collected = True
+                        self.relics_collected += 1
+                if self.relics_collected == 2:
+                    self.game_win()
+
             # Update all sprites
             self.all_sprites.update(dt)
 
@@ -175,6 +234,9 @@ class Game:
             text = "Life: " + str(self.game_health)
             life_banner = self.font.render(text, True, (255, 0, 0))
             self.display_surface.blit(life_banner, (20, 20))
+            text2 = "Relics Collected: " + str(self.relics_collected)
+            relic_banner = self.font.render(text2, True, (255, 255, 0))
+            self.display_surface.blit(relic_banner, (20, 50))
 
             # screen update
             pygame.display.update()

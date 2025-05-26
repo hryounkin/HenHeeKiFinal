@@ -30,3 +30,11 @@ class TransitionSprite(CollisionSprite):
     """
     def __init__(self, pos, surf, groups):
         super().__init__(pos, surf, groups)
+
+
+class RelicSprite(CollisionSprite):
+    """
+    Used for detecting relics.
+    """
+    def __init__(self, pos, surf, groups):
+        super().__init__(pos, surf, groups)

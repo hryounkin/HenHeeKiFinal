@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="47">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="51">
  <tileset firstgid="1" source="../TSX/terrain_atlas.tsx"/>
  <layer id="1" name="ground" width="50" height="50">
   <data encoding="csv">
@@ -151,9 +151,21 @@
   <object id="35" name="Hero" x="1007.47" y="56.25">
    <point/>
   </object>
-  <object id="42" name="Enemy" x="288" y="1148">
+  <object id="42" name="Boss" x="288" y="1148">
    <point/>
   </object>
   <object id="44" name="Transition" x="960.182" y="-2.33333" width="95.3182" height="14.1818"/>
+  <object id="47" name="Enemy" x="1515.15" y="1072.73">
+   <point/>
+  </object>
+  <object id="48" name="Enemy" x="536.364" y="818.182">
+   <point/>
+  </object>
+  <object id="49" name="Enemy" x="1151.52" y="754.545">
+   <point/>
+  </object>
+  <object id="50" name="Enemy" x="703.03" y="1500">
+   <point/>
+  </object>
  </objectgroup>
 </map>

@@ -7,10 +7,8 @@ class AllSprites(pygame.sprite.Group):
     Custom sprite group that handles drawing all sprites with a camera offset.
     It centers the view on a specified target, usually the player's position.
     """
-
     def __init__(self):
         super().__init__()
-        # Get the current display surface from Pygame
         self.display_surface = pygame.display.get_surface()
         # Initialize the camera offset (Vector2 for x and y coordinates)
         self.offset = pygame.Vector2()
@@ -18,11 +16,9 @@ class AllSprites(pygame.sprite.Group):
     def draw(self, target_pos):
         """
         Draws all sprites in the group relative to the target_pos.
-        The offset is calculated to center the target_pos on the screen.
 
         :param target_pos: Tuple (x, y) representing the central point (e.g., player's center)
         """
-        # Calculate the offset based on target position and screen center
         self.offset.x = -(target_pos[0] - WINDOW_WIDTH / 2)
         self.offset.y = -(target_pos[1] - WINDOW_HEIGHT / 2)
 

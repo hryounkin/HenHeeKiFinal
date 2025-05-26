@@ -5,7 +5,7 @@ from settings import *
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, collision_sprites, player, game):
+    def __init__(self, pos, groups, collision_sprites, player, game, speed=225):
         super().__init__(groups)
         self.game = game
 
@@ -41,7 +41,7 @@ class Enemy(pygame.sprite.Sprite):
         self.detect_radius = 200
         self.chase_radius = 700
         self.current_radius = self.detect_radius
-        self.speed = 200  # Movement speed (pixels per second)
+        self.speed = speed  # Movement speed (pixels per second)
         self.direction = pygame.Vector2()
         self.collision_sprites = collision_sprites
 

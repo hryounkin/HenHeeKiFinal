@@ -40,7 +40,7 @@ class Player(pygame.sprite.Sprite):
 
         # Movement settings
         self.direction = pygame.Vector2()
-        self.speed = 400  # Movement speed (pixels per second)
+        self.speed = 350  # Movement speed (pixels per second)
         self.collision_sprites = collision_sprites
 
 
@@ -62,6 +62,7 @@ class Player(pygame.sprite.Sprite):
                         )
                         self.frames[state].append(surf)
 
+
     def input(self):
         """
         Processes keyboard input to update the movement direction of the player.
@@ -73,6 +74,7 @@ class Player(pygame.sprite.Sprite):
         # Normalize the vector to ensure consistent speed in diagonal movement
         if self.direction.length() != 0:
             self.direction = self.direction.normalize()
+
 
     def move(self, dt):
         """
@@ -90,6 +92,7 @@ class Player(pygame.sprite.Sprite):
 
         # Align the visible sprite's rect with the hitbox
         self.rect.center = self.hitbox_rect.center
+
 
     def collision(self, direction):
         """
@@ -109,6 +112,7 @@ class Player(pygame.sprite.Sprite):
                         self.hitbox_rect.top = sprite.rect.bottom
                     elif self.direction.y > 0:  # Moving down
                         self.hitbox_rect.bottom = sprite.rect.top
+
 
     def animate(self, dt):
         """
@@ -130,6 +134,7 @@ class Player(pygame.sprite.Sprite):
 
         # Update the image based on the current frame in the animation cycle
         self.image = self.frames[self.state][int(self.frame_index) % len(self.frames[self.state])]
+
 
     def get_position(self):
         return self.rect.center

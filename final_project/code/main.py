@@ -13,7 +13,6 @@ class Game:
     Main game class responsible for initializing the game, loading map data,
     tracking player health, and running the main game loop.
     """
-
     def __init__(self):
         pygame.init()
 
@@ -44,6 +43,7 @@ class Game:
         # Load the map to start
         self.current_map= "Forest"
         self.setup(FOREST_MAP_FILE)
+
 
     def setup(self, map_file):
         """
@@ -102,12 +102,22 @@ class Game:
                     self.all_sprites,
                     self.collision_sprites,
                     self.player,
-                    self
+                    self,
+                )
+            if obj.name == 'Boss':
+                self.enemy = Enemy(
+                    (obj.x * SCALE_FACTOR*2, obj.y * SCALE_FACTOR*2),
+                    self.all_sprites,
+                    self.collision_sprites,
+                    self.player,
+                    self,
+                    310
                 )
 
 
     def map_transition(self, map):
         self.setup(map)
+
 
     def game_over(self):
         #ends the game
@@ -166,14 +176,12 @@ class Game:
             life_banner = self.font.render(text, True, (255, 0, 0))
             self.display_surface.blit(life_banner, (20, 20))
 
-            # Update the full display surface to the screen
+            # screen update
             pygame.display.update()
 
-        # Clean up and exit when the game loop is terminated
         pygame.quit()
 
 
 if __name__ == '__main__':
-    # Instantiate and run the game
     game = Game()
     game.run()

@@ -1,4 +1,4 @@
-# 🕹️ 2D Top-Down Adventure Game
+# Clone Chase
 
 A 2D top-down game built with **Pygame**, featuring enemy AI, collectible relics, map transitions, and collision detection. 
 Navigate the world, avoid or outmaneuver chasing enemies, and collect hidden items to progress!
